@@ -40,11 +40,12 @@ def action_wrapper(hermes, intentMessage, conf):
     """ 
     hours = datetime.datetime.now().hour
     minutes = datetime.datetime.now().minute
-    seconds = datetime.datetime.now().second
+    if minutes == 0:
+        minutes = ""
     if hours == 1:
-        result_sentence = "Gerade ist es ein Uhr {0} und {1} Sekunden.".format(minutes, seconds)
+        result_sentence = "Gerade ist es ein Uhr {0}.".format(minutes)
     else:
-        result_sentence = "Gerade sind es {0} Uhr {1} und {2} Sekunden.".format(hours, minutes, seconds)
+        result_sentence = "Gerade ist es {0} Uhr {1}.".format(hours, minutes)
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
 
