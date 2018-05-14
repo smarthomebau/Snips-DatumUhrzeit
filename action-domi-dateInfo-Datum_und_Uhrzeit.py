@@ -39,11 +39,12 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """ 
     result_sentence = "Ich habe dich nicht verstanden."
-    if slots['datetype'] == 'weekday':
+    datetype = intentMessage.slots.datetype.first().value
+    if datetype == 'weekday':
         weekday = datetime.datetime.now().isoweekday()
         weekday_list = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
         result_sentence = "Heute haben wir {weekday}.".format(weekday=weekday_list[weekday - 1])
-    if slots['datetype'] == 'year':
+    if datetype == 'year':
         year = datetime.datetime.now().year
         result_sentence = "Wir sind im Jahr {year}".format(year=year)
     current_session_id = intentMessage.session_id
