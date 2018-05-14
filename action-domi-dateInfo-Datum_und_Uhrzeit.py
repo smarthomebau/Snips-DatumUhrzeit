@@ -40,7 +40,7 @@ def action_wrapper(hermes, intentMessage, conf):
     """ 
     result_sentence = "Ich habe dich nicht verstanden."
     datetype = intentMessage.slots.datetype.first().value
-    if datetype == 'weekday':
+    if datetype == 'weekday' or datetype == 'wochentag':
         weekday = datetime.datetime.now().isoweekday()
         weekday_list = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
         result_sentence = "Heute haben wir {weekday}.".format(weekday=weekday_list[weekday - 1])
