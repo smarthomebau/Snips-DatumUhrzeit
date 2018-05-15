@@ -38,7 +38,7 @@ def action_wrapper(hermes, intentMessage, conf):
 
     Refer to the documentation for further details. 
     """ 
-    result_sentence = "Ich habe dich nicht verstanden."
+    result_sentence = "Diese Funktion ist noch nicht vorhanden, wird aber bald hinzugefügt."
     datetype = intentMessage.slots.datetype.first().value
     if datetype == 'weekday' or datetype == 'wochentag':
         weekday = datetime.datetime.now().isoweekday()
