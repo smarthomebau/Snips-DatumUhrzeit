@@ -40,8 +40,14 @@ def action_wrapper(hermes, intentMessage, conf):
 
     Refer to the documentation for further details. 
     """
-    print(intentMessage.slots.date.InstantTime.grain)
-    print(intentMessage.slots.date.InstantTime.precision)
+    try:
+        print(intentMessage.slots.date.InstantTime.grain)
+    except:
+        print("error 1")
+    try:
+        print(intentMessage.slots.date.first().InstantTime.precision)
+    except:
+        print("error 2")
     print(intentMessage.slots.date.InstantTime.value)
     #date = intentMessage.slots.date.first().value
     result_sentence = "Wir haben gerade die Kalenderwoche"
