@@ -37,14 +37,10 @@ def action_wrapper(hermes, intentMessage, conf):
     - intentMessage : an object that represents the recognized intent
     - hermes : an object with methods to communicate with the MQTT bus following the hermes protocol. 
     - conf : a dictionary that holds the skills parameters you defined 
-
-    Refer to the documentation for further details. 
     """
-    print(intentMessage.slots.date.first().value)
     datetime_str = intentMessage.slots.date.first().value[:-10]
     datetime_obj = datetime.datetime.strptime(datetime_str, "%Y-%m-%d %H:%M")
-    weeknumber = datetime_obj.isocalendar()[1]
-    result_sentence = "An diesem Datum ist die Kalenderwoche {weeknumber}".format(weeknumber=weeknumber)
+    result_sentence = "An diesem Datum ist die Kalenderwoche {0}".format(datetime_obj.isocalendar()[1])
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
 
