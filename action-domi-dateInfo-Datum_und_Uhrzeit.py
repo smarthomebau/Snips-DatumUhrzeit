@@ -40,6 +40,7 @@ def action_wrapper(hermes, intentMessage, conf):
     """ 
     result_sentence = "Diese Funktion ist noch nicht vorhanden, wird aber bald hinzugefügt."
     datetype = intentMessage.slots.datetype.first().value
+    print(intentMessage.slots.datetype)
     if datetype == 'weekday':
         weekday = datetime.datetime.now().isoweekday()
         weekday_list = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
