@@ -40,13 +40,22 @@ def action_wrapper(hermes, intentMessage, conf):
     """ 
     result_sentence = "Diese Funktion ist noch nicht vorhanden, wird aber bald hinzugefügt."
     datetype = intentMessage.slots.datetype.first().value
-    if datetype == 'weekday' or datetype == 'wochentag':
+    if datetype == 'weekday':
         weekday = datetime.datetime.now().isoweekday()
         weekday_list = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
         result_sentence = "Heute haben wir {weekday}.".format(weekday=weekday_list[weekday - 1])
-    if datetype == 'year':
+    elif datetype == 'year':
         year = datetime.datetime.now().year
         result_sentence = "Wir sind im Jahr {year}".format(year=year)
+    elif datetype == 'weeknumber':
+        weeknumber = datetime.datetime.now().isocalendar()[1]
+        result_sentence = "Wir haben gerade die Kalenderwoche {weeknumber}".format(weeknumber=weeknumber)
+    elif datetype == 'minute':
+        minutes = datetime.datetime.now().minute
+        result_sentence = "Wir haben die Minute {minutes}".format(minutes=minutes)
+    elif datetype == 'hour':
+        hours = datetime.datetime.now().hour
+        result_sentence = "Wir haben gerade die Stunde {hours}".format(hours=hours)
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
 
