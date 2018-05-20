@@ -40,20 +40,11 @@ def action_wrapper(hermes, intentMessage, conf):
 
     Refer to the documentation for further details. 
     """
-    try:
-        print(intentMessage.slots.date.first().value)
-    except AttributeError as e:
-        print("error 1:", e)
-    try:
-        print(intentMessage.slots.date.first())
-    except AttributeError as e:
-        print("error 2:", e)
-    try:
-        print(intentMessage.slots.date.first().minute)
-    except AttributeError as e:
-        print("error 3:", e)
-    #date = intentMessage.slots.date.first().value
-    result_sentence = "Wir haben gerade die Kalenderwoche"
+    print(intentMessage.slots.date.first().value)
+    datetime_str = intentMessage.slots.date.first().value[:-10]
+    datetime_obj = datetime.datetime.strptime(datetime_str, "%Y-%m-%d %H:%M")
+    weeknumber = datetime_obj.isocalendar()[1]
+    result_sentence = "An diesem Datum ist die Kalenderwoche {weeknumber}".format(weeknumber=weeknumber)
     current_session_id = intentMessage.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
 
