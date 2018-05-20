@@ -42,13 +42,16 @@ def action_wrapper(hermes, intentMessage, conf):
     """
     try:
         print(intentMessage.slots.date.InstantTime.grain)
-    except:
-        print("error 1")
+    except AttributeError as e:
+        print("error 1:", e)
     try:
         print(intentMessage.slots.date.first().InstantTime.precision)
-    except:
-        print("error 2")
-    print(intentMessage.slots.date.InstantTime.value)
+    except AttributeError as e:
+        print("error 2:", e)
+    try:
+        print(intentMessage.slots.date.slot_value.InstantTime.precision)
+    except AttributeError as e:
+        print("error 3:", e)
     #date = intentMessage.slots.date.first().value
     result_sentence = "Wir haben gerade die Kalenderwoche"
     current_session_id = intentMessage.session_id
