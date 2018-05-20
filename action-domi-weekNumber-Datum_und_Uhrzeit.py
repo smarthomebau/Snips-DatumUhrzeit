@@ -41,15 +41,15 @@ def action_wrapper(hermes, intentMessage, conf):
     Refer to the documentation for further details. 
     """
     try:
-        print(intentMessage.slots.date.first().InstantTime.value)
+        print(intentMessage.slots.date.first().value)
     except AttributeError as e:
         print("error 1:", e)
     try:
-        print(intentMessage.slots.date.first().InstantTime)
+        print(intentMessage.slots.date.first())
     except AttributeError as e:
         print("error 2:", e)
     try:
-        print(intentMessage.slots.date.first().InstantTime.minute)
+        print(intentMessage.slots.date.first().minute)
     except AttributeError as e:
         print("error 3:", e)
     #date = intentMessage.slots.date.first().value
