@@ -25,8 +25,10 @@ def read_configuration_file(configuration_file):
         return dict()
 
 def subscribe_intent_callback(hermes, intentMessage):
-    conf = read_configuration_file(CONFIG_INI)
-    action_wrapper(hermes, intentMessage, conf)
+    user,intentname = intentMessage.intent.intent_name.split(':')  # the user can fork the intent with this method
+    if intentname == "dateInfo":
+        conf = read_configuration_file(CONFIG_INI)
+        action_wrapper(hermes, intentMessage, conf)
 
 
 def action_wrapper(hermes, intentMessage, conf):
@@ -35,20 +37,18 @@ def action_wrapper(hermes, intentMessage, conf):
     - intentMessage : an object that represents the recognized intent
     - hermes : an object with methods to communicate with the MQTT bus following the hermes protocol. 
     - conf : a dictionary that holds the skills parameters you defined 
-
-    Refer to the documentation for further details. 
     """ 
     result_sentence = "Diese Funktion ist noch nicht vorhanden, wird aber bald hinzugefügt."
     datetype = intentMessage.slots.datetype.first().value
     print(intentMessage.slots.datetype)
-    if datetype == 'weekday':
+    if datetype == 'weekday' or 'wochentag' in datetype:
         weekday = datetime.datetime.now().isoweekday()
         weekday_list = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
         result_sentence = "Heute haben wir {weekday}.".format(weekday=weekday_list[weekday - 1])
     elif datetype == 'year':
         year = datetime.datetime.now().year
         result_sentence = "Wir sind im Jahr {year}".format(year=year)
-    elif datetype == 'weeknumber':
+    elif datetype == 'weeknumber' or 'kw' in datetype:
         weeknumber = datetime.datetime.now().isocalendar()[1]
         result_sentence = "Wir haben gerade die Kalenderwoche {weeknumber}".format(weeknumber=weeknumber)
     elif datetype == 'minute':
@@ -63,5 +63,4 @@ def action_wrapper(hermes, intentMessage, conf):
 
 if __name__ == "__main__":
     with Hermes("localhost:1883") as h:
-        h.subscribe_intent("domi:dateInfo", subscribe_intent_callback) \
-.start()
+        h.subscribe_intents(subscribe_intent_callback).start()
