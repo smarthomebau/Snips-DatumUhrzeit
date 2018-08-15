@@ -70,5 +70,6 @@ and some others.
 
 ## Contribution
 
-Please report errors (you can see them with `sam service log`) and bugs by opening a new issue.
+Please report errors (you can see them with `sam service log`) and bugs by
+opening a [new issue](https://github.com/MrJohnZoidberg/Snips-DatumUhrzeit/issues/new).
 You can also write other ideas for this skill. Thank you for your contribution.
