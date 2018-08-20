@@ -1,5 +1,5 @@
 # Snips-DatumUhrzeit 🕑
-A date and time skill for Snips.ai
+A date and time app for Snips.ai
 
 ## Installation
 
@@ -7,8 +7,8 @@ A date and time skill for Snips.ai
 already configured and running on your device. [SAM](https://snips.gitbook.io/getting-started/installation) should
 also already be set up and connected to your device and your account.
 
-1. In the German [skill store](https://console.snips.ai/) add the
-skill `Datum + Uhrzeit` (by domi; [this](https://console.snips.ai/app-editor/bundle_9P346QWA0xE)) to
+1. In the German [app store](https://console.snips.ai/) add the
+app `Datum & Uhrzeit` (by domi; [this](https://console.snips.ai/app-editor/bundle_9P346QWA0xE)) to
 your *German* assistant.
 
 2. If you already have the same assistant on your platform, update it
@@ -26,7 +26,7 @@ That's it!
 
 ## Usage
 
-With this skill you can ask Snips for information about the date and the time, including the day of the week,
+With this app you can ask Snips for information about the date and the time, including the day of the week,
 and some others.
 
 ### Example sentences
