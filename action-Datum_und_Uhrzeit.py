@@ -80,6 +80,7 @@ if __name__ == "__main__":
         MQTT_BROKER_ADDRESS = config['snips-common']['mqtt']
     if 'mqtt_username' in config['snips-common'].keys():
         MQTT_USERNAME = config['snips-common']['mqtt_username']
+        print("Der User ist", MQTT_USERNAME)
     if 'mqtt_password' in config['snips-common'].keys():
         MQTT_PASSWORD = config['snips-common']['mqtt_password']
 
