@@ -7,6 +7,9 @@ import toml
 
 
 USERNAME_INTENTS = "domi"
+MQTT_BROKER_ADDRESS = "localhost:1883"
+MQTT_USERNAME = None
+MQTT_PASSWORD = None
 
 
 def user_intent(intentname):
@@ -73,10 +76,13 @@ def subscribe_intent_callback(hermes, intent_message):
 if __name__ == "__main__":
     config = toml.load('/etc/snips.toml')
 
-    broker_address = config['snips-common']['mqtt']
-    mqtt_username = config['snips-common']['mqtt_username']
-    mqtt_password = config['snips-common']['mqtt_password']
+    if 'mqtt' in config['snips-common'].keys():
+        MQTT_BROKER_ADDRESS = config['snips-common']['mqtt']
+    if 'mqtt_username' in config['snips-common'].keys():
+        MQTT_USERNAME = config['snips-common']['mqtt_username']
+    if 'mqtt_password' in config['snips-common'].keys():
+        MQTT_PASSWORD = config['snips-common']['mqtt_password']
 
-    mqtt_opts = MqttOptions(username=mqtt_username, password=mqtt_password, broker_address=broker_address)
+    mqtt_opts = MqttOptions(username=MQTT_USERNAME, password=MQTT_PASSWORD, broker_address=MQTT_BROKER_ADDRESS)
     with Hermes(mqtt_options=mqtt_opts) as h:
         h.subscribe_intents(subscribe_intent_callback).start()
