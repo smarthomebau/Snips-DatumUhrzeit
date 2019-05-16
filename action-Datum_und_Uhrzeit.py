@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-from hermes_python.hermes import Hermes
+from hermes_python.hermes import Hermes, MqttOptions
 import datetime
 import random
+import toml
 
 
 USERNAME_INTENTS = "domi"
@@ -70,5 +71,12 @@ def subscribe_intent_callback(hermes, intent_message):
 
 
 if __name__ == "__main__":
-    with Hermes("localhost:1883") as h:
+    config = toml.load('/etc/snips.toml')
+
+    broker_address = config['snips-common']['mqtt']
+    mqtt_username = config['snips-common']['mqtt_username']
+    mqtt_password = config['snips-common']['mqtt_password']
+
+    mqtt_opts = MqttOptions(username=mqtt_username, password=mqtt_password, broker_address=broker_address)
+    with Hermes(mqtt_options=mqtt_opts) as h:
         h.subscribe_intents(subscribe_intent_callback).start()
