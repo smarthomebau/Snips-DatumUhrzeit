@@ -31,9 +31,9 @@ def subscribe_intent_callback(hermes, intent_message):
         if minutes == 0:
             minutes = ""
         if hours == 1:
-            result_sentence = "Gerade ist es ein Uhr {0} .".format(minutes)
+            result_sentence = "ein Uhr {0} .".format(minutes)
         else:
-            result_sentence = "Gerade ist es {0} Uhr {1} .".format(hours, minutes)
+            result_sentence = "{0} Uhr {1} .".format(hours, minutes)
         first_part = ["Gerade ist es", "Es ist jetzt", "Es ist", "Die aktuelle Zeit ist"]
         result_sentence = random.choice(first_part) + " " + result_sentence
         current_session_id = intent_message.session_id
