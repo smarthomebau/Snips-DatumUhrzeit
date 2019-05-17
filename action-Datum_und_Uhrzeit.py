@@ -74,15 +74,13 @@ def subscribe_intent_callback(hermes, intent_message):
 
 
 if __name__ == "__main__":
-    config = toml.load('/etc/snips.toml')
-
-    if 'mqtt' in config['snips-common'].keys():
-        MQTT_BROKER_ADDRESS = config['snips-common']['mqtt']
-    if 'mqtt_username' in config['snips-common'].keys():
-        MQTT_USERNAME = config['snips-common']['mqtt_username']
-        print("Der User ist", MQTT_USERNAME)
-    if 'mqtt_password' in config['snips-common'].keys():
-        MQTT_PASSWORD = config['snips-common']['mqtt_password']
+    snips_config = toml.load('/etc/snips.toml')
+    if 'mqtt' in snips_config['snips-common'].keys():
+        MQTT_BROKER_ADDRESS = snips_config['snips-common']['mqtt']
+    if 'mqtt_username' in snips_config['snips-common'].keys():
+        MQTT_USERNAME = snips_config['snips-common']['mqtt_username']
+    if 'mqtt_password' in snips_config['snips-common'].keys():
+        MQTT_PASSWORD = snips_config['snips-common']['mqtt_password']
 
     mqtt_opts = MqttOptions(username=MQTT_USERNAME, password=MQTT_PASSWORD, broker_address=MQTT_BROKER_ADDRESS)
     with Hermes(mqtt_options=mqtt_opts) as h:
