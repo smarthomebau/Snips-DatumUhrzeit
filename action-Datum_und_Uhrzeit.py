@@ -6,7 +6,7 @@ import random
 import toml
 
 
-USERNAME_INTENTS = "domi"
+USERNAME_INTENTS = "smarthomebau"
 MQTT_BROKER_ADDRESS = "localhost:1883"
 MQTT_USERNAME = None
 MQTT_PASSWORD = None
@@ -51,7 +51,7 @@ def subscribe_intent_callback(hermes, intent_message):
         hermes.publish_end_session(current_session_id, result_sentence)
 
     elif intentname == user_intent("dateInfo"):
-        result_sentence = "Diese Funktion ist noch nicht vorhanden, wird aber bald hinzugefügt."
+        result_sentence = "Diese Funktion ist noch nicht vorhanden, wird aber bald hinzugefuegt."
         datetype = intent_message.slots.datetype.first().value
         if datetype == 'weekday' or 'wochentag' in datetype:
             weekday = datetime.datetime.now().isoweekday()
