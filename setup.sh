@@ -8,7 +8,7 @@ then
 
     if [ ! -d $VENV ]
     then
-        # Create a virtual environment if it doesn't exist.
+        # Create a virtual environment if it doesn't exist. 
         $PYTHON -m venv $VENV
     else
         if [ -e $VENV/bin/python2 ]
